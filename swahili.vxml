@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vxml version = "2.1" >
+
+
+<menu id="menu1" dtmf="true">
+	<prompt>
+		<audio src = "http://ict4d2021.saadittoh.com/group12/wavs/SWA_Welcome_to_CARPA.wav">
+                    Welcome to CARPA, a crowdsourcing platform that enables the sharing of information on responsible production.
+                    Please select in which country you would like to report an incident.
+                    Press 1 for Mali.
+                    Press 2 for South Africa.
+                    Press 3 for Congo.
+                    Press 4 if you want more information on CARPA.
+            </audio>
+	</prompt>
+
+	<noinput>
+		<audio src = "http://ict4d2021.saadittoh.com/group12/wavs/SWA_No-key-was-pressed-02.wav">
+		No key was pressed.
+		</audio>
+		<reprompt/>
+	</noinput>
+
+	<nomatch>
+		<audio src = "http://ict4d2021.saadittoh.com/group12/wavs/SWA_Invalid-option_01.wav">
+		Couldn't understand or invalid option.
+		</audio>
+		 <reprompt/>
+	</nomatch>
+
+	<choice dtmf="1" next="#Mali"/>
+	<choice dtmf="2" next="#SouthAfrica"/>
+	<choice dtmf="3" next="#Congo"/>
+	<choice dtmf="4" next="#info"/>
+
+</menu>
+
+ <form id="Mali">
+  <block>
+   <prompt>
+        <audio src = "http://ict4d2021.saadittoh.com/group12/wavs/SWA_You-chose-Mali_01.wav">
+        	You chose Mali.
+        </audio>
+   </prompt>
+   <goto next="#GET_INFO_loca"/>
+ </block>
+ </form>
+
+ <form id="SouthAfrica">
+  <block>
+      <prompt>
+        <audio src = "http://ict4d2021.saadittoh.com/group12/wavs/SWA_You_chose_SA.wav">
+        You chose South Africa.
+        </audio>
+   </prompt>
+   <goto next="#GET_INFO_loca"/>
+  </block>
+ </form>
+
+ <form id="Congo">
+  <block>
+      <prompt>
+        <audio src = "http://ict4d2021.saadittoh.com/group12/wavs/SWA_You-chose-Congo_01.wav">
+        	You chose Congo.
+        </audio>
+   </prompt>
+   <goto next="#GET_INFO_loca"/>
+  </block>
+ </form>
+
+ <form id="info">
+  <block>
+   <prompt>
+        <audio src= "http://ict4d2021.saadittoh.com/group12/wavs/SWA_You-chose-more-Infos-02_01.wav">
+        You chose for more information.
+        CARPA is a crowdsourcing platform that enables the sharing of information on responsible production.
+        Users of CARPA are able to contribute reports and participate in dialogue surrounding incidents.
+        Incidents that are tracked on CARPA consist of one or more reports.
+        These reports can state that a violation has taken place, or that a remedy has been found.
+        Reports can be contributed by all users of CARPA.
+        </audio>
+   </prompt><break time="2s"/>
+<goto next="#menu1"/>
+  </block>
+ </form>
+
+
+ <form id="GET_INFO_loca">
+	<block>
+       <prompt>
+       		<audio src= "http://ict4d2021.saadittoh.com/group12/wavs/SWA_Please-tell-exact-location_01.wav">
+       		Please tell the exact location of the incident after the beep.
+       		</audio>
+       </prompt>
+	</block>
+
+	<property name="inputmodes" value="dtmf"/>
+    	<property name="interdigittimeout" value="2s"/>
+    	<property name="timeout" value="4s"/>
+
+	<record name="messageLocation" beep="true" maxtime="10s" dtmfterm="true">
+       <noinput>
+          <audio src= "http://ict4d2021.saadittoh.com/group12/wavs/SWA_Invalid-option_01.wav">
+       			I didn't hear anything, please try again.
+       		</audio>
+       </noinput>
+    </record>
+
+
+    <block>
+	<prompt>
+	    <audio src= "http://ict4d2021.saadittoh.com/group12/wavs/SWA_Thank-you-reporting_01.wav">
+       	Thank you for reporting the exact location.
+       </audio>
+	</prompt>
+	<break time="1s"/>
+    	<goto next="#onbehalfof"/>
+    </block>
+</form>
+
+
+<menu id="onbehalfof" dtmf="true">
+		<prompt>
+			<audio src = "http://ict4d2021.saadittoh.com/group12/wavs/SWA_Please-select-if-reporting-yourself-or-someone-els.wav">
+			We would like to know if you are reporting an incident for yourself or on behalf
+			of someone else?
+			Press 1 for reporting for yourself.
+			Press 2 for reporting for somebody else.
+			</audio>
+		</prompt>
+		<noinput>
+			<reprompt/>
+		</noinput>
+		<nomatch>
+			<audio src = "http://ict4d2021.saadittoh.com/group12/wavs/SWA_Invalid-option_01.wav">Couldn't understand or invalid option. </audio>
+			<reprompt/>
+		</nomatch>
+
+		<choice dtmf="1" next="#yourself"/>
+		<choice dtmf="2" next="#somebody"/>
+</menu>
+
+ <form id="yourself">
+  <block>
+      <prompt>
+		 	<audio src = "http://ict4d2021.saadittoh.com/group12/wavs/SWA_You-chose-to-report-for-yourself.wav">
+		 	You chose to report an incident on behalf of yourself
+	 		</audio>
+		</prompt>
+   <break time="1s"/>
+   <goto next="#menu2"/>
+  </block>
+ </form>
+
+  <form id="somebody">
+  <block>
+      <prompt>
+		 <audio src = "http://ict4d2021.saadittoh.com/group12/wavs/SWA_You-chose-to-report-for-someone-else.wav">
+			 You chose to report an incident on behalf of somebody else.
+		 </audio>
+	 </prompt>
+   <break time="1s"/>
+   <goto next="#menu2"/>
+  </block>
+ </form>
+
+
+<menu id="menu2" dtmf="true">
+	<prompt> <audio src = "http://ict4d2021.saadittoh.com/group12/wavs/SWA_We-would-like-to-know-the-type-of-incident.wav">
+		We would like to know the type of incident you want to report.
+		Press 1 for Community Development and Poverty.
+		Press 2 for Health.
+		Press 3 for Labor.
+		Press 4 for corruption.
+		Press 5 for physical abuse or Flagrant human rights violation.
+		Press 6 for environment.
+		Press 7 for other.
+		Stay on the line if you want to hear the menu again.
+		</audio>
+	</prompt>
+
+	<noinput>
+		<audio src = "http://ict4d2021.saadittoh.com/group12/wavs/SWA_No-key-was-pressed-02.wav">
+		No key was pressed. </audio>
+		<reprompt/>
+	</noinput>
+
+
+	<choice dtmf="1" next="#f1"/>
+	<choice dtmf="2" next="#f2"/>
+	<choice dtmf="3" next="#f3"/>
+	<choice dtmf="4" next="#f4"/>
+	<choice dtmf="5" next="#f5"/>
+	<choice dtmf="6" next="#f6"/>
+	<choice dtmf="7" next="#f7"/>
+
+</menu>
+
+<form id="f1">
+	<block>
+		<prompt>
+		<audio src = "http://ict4d2021.saadittoh.com/group12/wavs/SWA_Incident-by-oral-description.wav">
+			You chose to report an incident about Community development and poverty. Does your incident concern denying basic needs, destruction of local markets, exploitation of local economy, lack of investment, land grabbing, no prior consultation with communities or denial of freedom of expression and of association. Then, please give an oral description of the incident and end your description by pressing any number.
+		</audio>
+		</prompt>
+		<goto next="#GET_INFO"/>
+	</block>
+</form>
+
+<form id="f2">
+	<block>
+		<prompt>
+			<audio src = "http://ict4d2021.saadittoh.com/group12/wavs/SWA_Incident-about-health.wav">
+			You chose to report an incident about Health. Does your incident concern denial of access to medicine, pollution-related health concern, health problems or AIDS and age eye Vee? Then, please give an oral description of the incident and end your description by pressing any number.
+			</audio>
+		</prompt>
+		<goto next="#GET_INFO"/>
+	</block>
+</form>
+
+<form id="f3">
+	<block>
+		<prompt>
+			<audio src = "http://ict4d2021.saadittoh.com/group12/wavs/SWA_Incident-by-oral-description.wav">
+			You chose to report an incident about Labor. Does your incident concern child labor, forced labor, denial of freedom of association, right to unionise, denial of freedom of expression, substandard waged, failure to meet basic labor standards or discrimination? Then, please give an oral description of the incident and end your description by pressing any number.
+			</audio>
+		</prompt>
+		<goto next="#GET_INFO"/>
+	</block>
+</form>
+
+<form id="f4">
+	<block>
+		<prompt>
+			<audio src = "http://ict4d2021.saadittoh.com/group12/wavs/SWA_Incident-about-corruption.wav">
+			You chose to report an incident about corruption. Does your incident concern cases of fraud or corruption? Then, please give an oral description of the incident and end your description by pressing any number key.
+			</audio>
+		</prompt>
+		<goto next="#GET_INFO"/>
+	</block>
+</form>
+
+<form id="f5">
+	<block>
+		<prompt>
+			<audio src = "http://ict4d2021.saadittoh.com/group12/wavs/SWA_Incident-by-oral-description.wav">
+			You chose to report an incident about Physical abuse or flagrant human rights violation. Does your incident concern intimidation, sexual abuse, violence, abduction, arbitrary detention or killings? Then, please give an oral description of the incident and end your description by pressing any number.
+			</audio>
+		</prompt>
+		<goto next="#GET_INFO"/>
+	</block>
+</form>
+
+<form id="f6">
+	<block>
+		<prompt>
+			<audio src = "http://ict4d2021.saadittoh.com/group12/wavs/SWA_Incident-by-oral-description.wav">
+			You chose to report an incident about Environment. Does your incident concern water, air or land contamination, land erosion, deforestation, destruction of natural resources or destruction of wildlife? Then, please give an oral description of the incident and end your description by pressing any number.
+			</audio>
+		</prompt>
+		<goto next="#GET_INFO"/>
+	</block>
+</form>
+
+<form id="f7">
+	<block>
+		<prompt>
+			<audio src = "http://ict4d2021.saadittoh.com/group12/wavs/SWA_Incident-by-oral-description.wav">
+			You choose to report an incident. Please give an oral description of the incident and end your description by pressing any number.
+			</audio>
+		</prompt>
+		<goto next="#GET_INFO"/>
+	</block>
+</form>
+
+
+<form id="GET_INFO">
+	<audio src = "http://ict4d2021.saadittoh.com/group12/wavs/SWA_Report-incident-after-beep.wav"/>
+
+	<property name="bargein" value="true"/>
+	<property name="inputmodes" value="dtmf"/>
+    <property name="interdigittimeout" value="2s"/>
+    <property name="timeout" value="4s"/>
+
+	<record name="messageIncident" beep="true" maxtime="60s" dtmfterm="true" type="audio/x-wav">
+	    <noinput>
+				<audio src = "http://ict4d2021.saadittoh.com/group12/wavs/SWA_Invalid-option_01.wav">
+				Couldn't understand or invalid option.
+				</audio>
+			<reprompt/>
+		</noinput>
+    </record>
+
+
+  <block>
+	    <prompt>
+						<audio src = "http://ict4d2021.saadittoh.com/group12/wavs/SWA_Your-message-is...wav">
+Your message is 
+		</audio>
+	    </prompt>
+	</block>
+
+	<block>
+		<prompt>
+		<audio expr="messageIncident"/>
+		</prompt>
+
+	    <goto next="#Discard_Keep"/>
+	</block>
+</form>
+
+<menu id="Discard_Keep" dtmf="true">
+	<prompt>
+		<audio src = "http://ict4d2021.saadittoh.com/group12/wavs/SWA_save-or-retake.wav">
+		Would you like to retake your message or save your message?
+		Press 1 for retaking 
+		Press 2 for saving it to the Carpa server.
+		</audio>
+	</prompt>
+	<choice dtmf="1" next="#retake"/>
+	<choice dtmf="2" next="#save"/>
+	<noinput>
+		<audio src = "http://ict4d2021.saadittoh.com/group12/wavs/SWA_No-key-was-pressed-02.wav">
+		No key was pressed. </audio>
+		<reprompt/>
+	</noinput>
+</menu>
+
+<form id="retake">
+	<block>
+		<goto next="#GET_INFO"/>
+	</block>
+</form>
+
+<form id="save">
+
+	<block>
+		<prompt>
+			<audio src = "http://ict4d2021.saadittoh.com/group12/wavs/SWA_Thank-you-reporting_01.wav">
+				Thank you for reporting the incident. Your report will now be saved on the CARPA server. Would you like to report another incident, stay on the line. Otherwise you can end this call.
+			</audio>
+		</prompt>
+	<break time="2s"/>
+    <goto next="#menu1"/>
+	</block>
+</form>
+</vxml>

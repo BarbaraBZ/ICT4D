@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vxml version = "2.1" >
+
+<menu id="language">
+    <prompt>
+
+        <audio src="http://ict4d2021.saadittoh.com/group12/wavs/English_press1_French_press2.wav"/>
+<audio src = "http://ict4d2021.saadittoh.com/group12/wavs/Press_3_for_Swahili.wav">
+It does not work
+</audio>
+        
+    </prompt>
+	<noinput>
+		<prompt> No key was pressed. </prompt>
+		<audio src="http://ict4d2021.saadittoh.com/group12/wavs/Nothing_heard_try_again.wav"/>
+		<audio src="http://ict4d2021.saadittoh.com/group12/wavs/SWA_No-key-was-pressed-02.wav"/>
+		<reprompt/>
+	</noinput>
+
+	<nomatch>
+		<prompt> Couldn't understand or invalid option.</prompt>
+		<audio src="http://ict4d2021.saadittoh.com/group12/wavs/Not_understand_invalid_option.wav"/>
+		<audio src="http://ict4d2021.saadittoh.com/group12/wavs/SWA_Invalid-option_01.wav"/>
+		 <reprompt/>
+	</nomatch>
+
+
+	<choice dtmf="1" next="english.vxml"/>
+	<choice dtmf="2" next="french.vxml"/>
+	<choice dtmf="3" next="swahili.vxml"/>
+
+</menu>
+
+</vxml>
